@@ -11,6 +11,7 @@ import com.vaadin.polymer.Polymer;
 import com.vaadin.polymer.elemental.Function;
 import com.vaadin.polymer.iron.element.IronIconElement;
 import com.vaadin.polymer.paper.element.PaperIconItemElement;
+import com.vaadin.polymer.paper.element.*;
 
 import java.util.Arrays;
 
