@@ -42,3 +42,12 @@ http://www.gwtproject.org/doc/latest/polymer-tutorial/create.html
  * In the GWT developer window, press "Launch Default Browser"
  * If you change something in the code, you can recompile the application by simply reloading the web page
  * If you change configuration files, e.g. pom.xml or static content in webapp, you might have to restart SuperDevMode. Ctrl+C and mvn gwt:run stops and starts the execution, respectively.
+ 
+## Importing web components
+
+Before using any component, you have to import the appropriate files. But gwt-polymer-elements comes with some utilities so as you it would be done automatically.
+
+* Widgets : When you use a widget, the import happens automatically  PaperButton button = new PapperButton(); 
+* Elements : .create() helper class ex) PaperButtonElement button = Polymer.create(PaperButtonElement.TAG); 
+* Dynamic imports : importHref("paper-button/paper-button.html"); 
+* Static imports : Adding tags to the hosted page head is the traditional way to make webcomponents available if you want them in a mixed application (DOM, JS, or GWT) or if you want to be sure that web components are available from the beginning.  <link rel='import' href='application_context/bower_components/paper-button/paper-button.html'></link> 
