@@ -24,6 +24,10 @@ Created with webAppCreator, a command line tool included in GWT that generates t
 * **web.xml** = Java web application descriptor
 * **GreetingService.java, GreetingServiceAsync.java, GreetingServiceImpl.java** = GWT sample RPC classes
 * **gwt-servlet.jar** = GWT server runtime library
+* **Main.java, Main.ui.xml** = UI Binder screen
+ * The UiBinder framework allows you to do exactly that: build your apps as HTML pages with GWT widgets sprinkled throughout them
+  * encourages a clean separation of the aesthetics of your UI (a declarative XML template) from its programmatic behavior (a Java class);
+  * There are no loops, no conditionals, no if statements in its markup, and only a very limited expression language. UiBinder allows you to lay out your user interface. It’s still up to the widgets or other controllers themselves to convert rows of data into rows of HTML.
 
 
 ### Link to Tutorial
