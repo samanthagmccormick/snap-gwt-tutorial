@@ -33,7 +33,7 @@ public class TodoList implements EntryPoint {
     
     // We have to load icon sets before run application
     Polymer.importHref(Arrays.asList(
-          "iron-icons/iron-icons.html",
+           "iron-icons/iron-icons.html",
            PaperIconItemElement.SRC,
            IronIconElement.SRC), new Function() {
       public Object call(Object arg) {
