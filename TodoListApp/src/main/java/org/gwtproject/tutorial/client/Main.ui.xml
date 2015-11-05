@@ -2,21 +2,31 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
       <g:HTMLPanel>
+        <style>
+          paper-icon-item {
+            position: relative;
+            overflow: hidden;
+          }
+        </style>
         <paper-icon-item ui:field="menuClearAll">
             <iron-icon icon="delete"/>
             <div>Clear All</div>
+            <paper-ripple/>
         </paper-icon-item>
         <paper-icon-item ui:field="menuClearDone">
             <iron-icon icon="clear"/>
             <div>Clear Done</div>
+            <paper-ripple/>
         </paper-icon-item>
         <paper-icon-item ui:field="menuSettings">
             <iron-icon icon="settings"/>
             <div>Settings</div>
+            <paper-ripple/>
         </paper-icon-item>
         <paper-icon-item ui:field="menuAbout">
             <iron-icon icon="help"/>
             <div>About</div>
+            <paper-ripple/>
         </paper-icon-item>
       </g:HTMLPanel>
     </ui:UiBinder>

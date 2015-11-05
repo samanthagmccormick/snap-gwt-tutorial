@@ -35,7 +35,8 @@ public class TodoList implements EntryPoint {
     Polymer.importHref(Arrays.asList(
            "iron-icons/iron-icons.html",
            PaperIconItemElement.SRC,
-           IronIconElement.SRC), new Function() {
+           IronIconElement.SRC,
+           PaperRippleElement.SRC), new Function() {
       public Object call(Object arg) {
         // The app is executed when all imports succeed.
         startApplication();
