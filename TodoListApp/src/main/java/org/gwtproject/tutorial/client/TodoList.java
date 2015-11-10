@@ -37,7 +37,10 @@ public class TodoList implements EntryPoint {
            "iron-icons/iron-icons.html",
            PaperIconItemElement.SRC,
            IronIconElement.SRC,
-           PaperRippleElement.SRC), new Function() {
+           PaperRippleElement.SRC,
+           PaperDrawerPanelElement.SRC,
+           PaperHeaderPanelElement.SRC,
+           PaperToolbarElement.SRC), new Function() {
       public Object call(Object arg) {
         // The app is executed when all imports succeed.
         startApplication();
