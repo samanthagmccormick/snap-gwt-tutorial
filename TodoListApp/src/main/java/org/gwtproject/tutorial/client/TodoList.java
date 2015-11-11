@@ -40,7 +40,8 @@ public class TodoList implements EntryPoint {
            PaperRippleElement.SRC,
            PaperDrawerPanelElement.SRC,
            PaperHeaderPanelElement.SRC,
-           PaperToolbarElement.SRC), new Function() {
+           PaperToolbarElement.SRC,
+           PaperFabElement.SRC), new Function() {
       public Object call(Object arg) {
         // The app is executed when all imports succeed.
         startApplication();

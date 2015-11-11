@@ -2,31 +2,38 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
       <g:HTMLPanel>
-        <style>
-        <!-- 
-        The GSS processor, and the way how GWT loads css resources asynchronously make impossible to use shadow and polymer selectors and properties inside <ui:style> blocks because first GSS will complain about certain syntaxes and second Polymer will ignore CssResource injected blocks. Thus you have to use normal <style> in your UiBinder file.
+        <!-- In order to make Polymer process your style block you need is="custom-style" attribute -->
+        <style is="custom-style">
+            <!-- 
+            The GSS processor, and the way how GWT loads css resources asynchronously make impossible to use shadow and polymer selectors and properties inside <ui:style> blocks because first GSS will complain about certain syntaxes and second Polymer will ignore CssResource injected blocks. Thus you have to use normal <style> in your UiBinder file.
 
-        We have two options:
+            We have two options:
 
-        1) Include your CSS in your hosting page (HTML file).
-        2) Utilize normal <style> tags in your UiBinder files.
-         -->
-          paper-icon-item {
-            <!-- Confines the animation to this element: -->
-            position: relative;
-            overflow: hidden;
-          }
-          .toolbar {
-            background: #4285f4;
-           }
-          .header {
-            font-size: 200%;
-            margin-left: 50px;
-           }
-          .content {
-            padding: 15px;
-           }
-          }
+            1) Include your CSS in your hosting page (HTML file).
+            2) Utilize normal <style> tags in your UiBinder files.
+             -->
+              paper-icon-item {
+                <!-- Confines the animation to this element: -->
+                position: relative;
+                overflow: hidden;
+              }
+              .toolbar {
+                background: #4285f4;
+               }
+              .header {
+                font-size: 200%;
+                margin-left: 50px;
+               }
+              .content {
+                padding: 15px;
+               }
+               .add {
+                position: absolute;
+                bottom: 20px;
+                right: 20px;
+                --paper-fab-background: var(--paper-red-500);
+               }
+              }
         </style>
         <paper-drawer-panel ui:field="drawerPanel">
             <div drawer="">
@@ -64,6 +71,7 @@
                     <!-- Todo Items -->
                     <div ui:field="content" class="content vertical center-justified layout"/>
                 </paper-header-panel>
+                <paper-fab ui:field="addButton" icon="add" title="add" class="add" />
             </div>
         </paper-drawer-panel>
       </g:HTMLPanel>
