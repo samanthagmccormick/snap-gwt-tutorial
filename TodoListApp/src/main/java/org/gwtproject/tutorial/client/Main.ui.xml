@@ -35,6 +35,12 @@
                }
               }
         </style>
+        
+        <!-- Any object declared in this ui.xml file, including any DOM elements, can be made available to the owning Java class through its ui:field name. In the Java code, a field with the same name is marked with the @UiField annotation. 
+        ex) <span ui:field="nameSpan" /> corresponds with @UiField SpanElement nameSpan; inside the Java code.
+        When uiBinder.createAndBindUi(this) is run in the Java code, the field is filled with the appropriate instance of SpanElement
+        -->
+        
         <paper-drawer-panel ui:field="drawerPanel">
             <div drawer="">
                 <paper-header-panel mode="seamed">
@@ -74,5 +80,18 @@
                 <paper-fab ui:field="addButton" icon="add" title="add" class="add" />
             </div>
         </paper-drawer-panel>
+        
+        <paper-dialog ui:field="addItemDialog" entry-animation="fade-in-animation" class="dialog" modal="">
+            <h2>Add Item</h2>
+            <paper-input ui:field="titleInput" label="Title" focused="" required="" auto-validate="" error-message="required input!"/>
+            <div class="textarea-container iron-autogrow-textarea">
+                <paper-textarea ui:field="descriptionInput" label="Notes"/>
+            </div>
+            <div class="buttons">
+                <paper-button dialog-dismiss="">Cancel</paper-button>
+                <paper-button ui:field="confirmAddButton" dialog-confirm="">OK</paper-button>
+            </div>
+        </paper-dialog>
+        
       </g:HTMLPanel>
     </ui:UiBinder>

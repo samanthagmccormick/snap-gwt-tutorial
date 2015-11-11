@@ -6,11 +6,9 @@ import com.google.gwt.core.client.EntryPoint;
 /* The panel to which all other widgets must ultimately be added. */
 import com.google.gwt.user.client.ui.RootPanel;
 /* GWT Polymer Elements - Paper Button (Material Design) */
-import com.vaadin.polymer.paper.widget.PaperButton;
 import com.vaadin.polymer.Polymer;
 import com.vaadin.polymer.elemental.Function;
 import com.vaadin.polymer.iron.element.IronIconElement;
-import com.vaadin.polymer.paper.element.PaperIconItemElement;
 import com.vaadin.polymer.paper.element.*;
 
 import java.util.Arrays;
@@ -31,17 +29,24 @@ public class TodoList implements EntryPoint {
     
     // Writes Hello World to the module log window.
     GWT.log("Hello World!", null);
-    
-    // We have to load icon sets before run application
+
     Polymer.importHref(Arrays.asList(
-           "iron-icons/iron-icons.html",
-           PaperIconItemElement.SRC,
-           IronIconElement.SRC,
-           PaperRippleElement.SRC,
-           PaperDrawerPanelElement.SRC,
-           PaperHeaderPanelElement.SRC,
-           PaperToolbarElement.SRC,
-           PaperFabElement.SRC), new Function() {
+        // We have to load icon sets
+        "iron-icons/iron-icons.html",
+        // And we have to load all web components in our application
+        // before using them as custom elements.
+        PaperDrawerPanelElement.SRC,
+        PaperHeaderPanelElement.SRC,
+        PaperToolbarElement.SRC,
+        PaperIconItemElement.SRC,
+        PaperRippleElement.SRC,
+        PaperIconButtonElement.SRC,
+        PaperFabElement.SRC,
+        PaperDialogElement.SRC,
+        PaperInputElement.SRC,
+        PaperTextareaElement.SRC,
+        PaperCheckboxElement.SRC,
+        PaperButtonElement.SRC), new Function() {
       public Object call(Object arg) {
         // The app is executed when all imports succeed.
         startApplication();
