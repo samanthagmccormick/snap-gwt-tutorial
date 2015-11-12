@@ -1,20 +1,126 @@
 package org.gwtproject.tutorial.client;
 
-    import com.google.gwt.core.client.GWT;
-    import com.google.gwt.uibinder.client.UiBinder;
-    /* A type of widget that can wrap another widget, hiding the wrapped widget's methods. When added to a panel, a composite behaves exactly as if the widget it wraps had been added.
-    The composite is useful for creating a single widget out of an aggregate of multiple other widgets contained in a single panel. */
-    import com.google.gwt.user.client.ui.Composite;
-    /* A panel that contains HTML, and which can attach child widgets to identified elements within that HTML. */
-    import com.google.gwt.user.client.ui.HTMLPanel;
+import java.util.ArrayList;
+import java.util.List;
 
-    public class Main extends Composite {
-      interface MainUiBinder extends UiBinder<HTMLPanel, Main> {
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTMLPanel;
+import com.vaadin.polymer.elemental.Event;
+import com.vaadin.polymer.elemental.EventListener;
+import com.vaadin.polymer.elemental.HTMLElement;
+import com.vaadin.polymer.paper.element.PaperButtonElement;
+import com.vaadin.polymer.paper.element.PaperDialogElement;
+import com.vaadin.polymer.paper.element.PaperDrawerPanelElement;
+import com.vaadin.polymer.paper.element.PaperFabElement;
+import com.vaadin.polymer.paper.element.PaperIconItemElement;
+import com.vaadin.polymer.paper.element.PaperInputElement;
+import com.vaadin.polymer.paper.element.PaperTextareaElement;
+
+public class Main extends Composite {
+  interface MainUiBinder extends UiBinder<HTMLPanel, Main> {}
+
+  // create your first widget ourUiBinder using the MainUiBinder class
+  private static MainUiBinder ourUiBinder = GWT.create(MainUiBinder.class);
+
+  // All the ui:field 's inside Main.ui.xml
+  @UiField
+  PaperDialogElement addItemDialog; // <paper-dialog>
+  @UiField
+  PaperInputElement titleInput; // <paper-input>
+  @UiField
+  PaperTextareaElement descriptionInput; // <paper-textarea>
+  @UiField
+  PaperButtonElement confirmAddButton; // <paper-button>
+
+  @UiField
+  PaperDrawerPanelElement drawerPanel; // <paper-drawer-panel>
+  @UiField
+  HTMLElement content; // <div>
+  @UiField
+  PaperFabElement addButton; // <paper-fab>
+  // Icons:
+  @UiField
+  PaperIconItemElement menuClearAll; // <paper-icon>
+  @UiField
+  PaperIconItemElement menuClearDone; // <paper-icon>
+
+  private List<Item> items = new ArrayList<>();
+
+  public Main() {
+    initWidget(ourUiBinder.createAndBindUi(this));
+
+    // On click of the "addButton" UIField (<paper-fab>)
+    addButton.addEventListener("click", new EventListener() {
+      @Override
+      public void handleEvent(Event event) {
+        GWT.log("Clicked", null);
+        addItemDialog.open();
       }
+    });
 
-      private static MainUiBinder ourUiBinder = GWT.create(MainUiBinder.class);
-
-      public Main() {
-        initWidget(ourUiBinder.createAndBindUi(this));
+    // Add Button functionality
+    confirmAddButton.addEventListener("click", new EventListener() {
+      @Override
+      public void handleEvent(Event event) {
+        // If title value isn't empty
+        if (!titleInput.getValue().isEmpty()) {
+          // add item using helper methods you added to Item.java
+          addItem(titleInput.getValue(), descriptionInput.getValue());
+          // clear text fields
+          titleInput.setValue("");
+          descriptionInput.setValue("");
+        }
       }
+    });
+
+    // Clear All Button functionality
+    menuClearAll.addEventListener("click", new EventListener() {
+      @Override
+      public void handleEvent(Event event) {
+        closeMenu();
+
+        // Remove all child nodes
+        while (content.hasChildNodes()) {
+          content.removeChild(content.getFirstChild());
+        }
+
+      }
+    });
+    
+    menuClearDone.addEventListener("click", new EventListener() {
+      @Override
+      public void handleEvent(Event event) {
+        closeMenu();
+
+        // remove items marked "done"
+        for (Item item : items) {
+          if (item.isDone()) {
+            content.removeChild(item.getElement());
+            items.remove(item);
+          }
+        }
+      }
+    });
+
+  } /* end Main() */
+
+  // New private method used in the confirmAddButton event handler
+  private void addItem(String title, String description) {
+    Item item = new Item();
+    item.setTitle(title);
+    item.setDescription(description);
+    content.appendChild(item.getElement());
+    items.add(item);
+  }
+
+  private void closeMenu() {
+    // No idea what getNarrow() means
+    if (drawerPanel.getNarrow()) {
+      drawerPanel.closeDrawer();
     }
+  }
+
+} // End class Main
