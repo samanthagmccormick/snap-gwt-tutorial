@@ -67,4 +67,4 @@ public class TodoList implements EntryPoint {
     RootPanel.get().add(new Main());
   }
 
-}
+} // end class ToDoList EntryPoint
