@@ -41,9 +41,11 @@ public class Main extends Composite {
   HTMLElement content; // <div>
   @UiField
   PaperFabElement addButton; // <paper-fab>
-
+  // Icons:
   @UiField
   PaperIconItemElement menuClearAll; // <paper-icon>
+  @UiField
+  PaperIconItemElement menuClearDone; // <paper-icon>
 
   private List<Item> items = new ArrayList<>();
 
@@ -74,7 +76,7 @@ public class Main extends Composite {
       }
     });
 
-    // Clear Button functionality
+    // Clear All Button functionality
     menuClearAll.addEventListener("click", new EventListener() {
       @Override
       public void handleEvent(Event event) {
@@ -87,7 +89,21 @@ public class Main extends Composite {
 
       }
     });
+    
+    menuClearDone.addEventListener("click", new EventListener() {
+      @Override
+      public void handleEvent(Event event) {
+        closeMenu();
 
+        // remove items marked "done"
+        for (Item item : items) {
+          if (item.isDone()) {
+            content.removeChild(item.getElement());
+            items.remove(item);
+          }
+        }
+      }
+    });
 
   } /* end Main() */
 
