@@ -15,6 +15,7 @@ import com.vaadin.polymer.paper.element.PaperButtonElement;
 import com.vaadin.polymer.paper.element.PaperDialogElement;
 import com.vaadin.polymer.paper.element.PaperDrawerPanelElement;
 import com.vaadin.polymer.paper.element.PaperFabElement;
+import com.vaadin.polymer.paper.element.PaperIconItemElement;
 import com.vaadin.polymer.paper.element.PaperInputElement;
 import com.vaadin.polymer.paper.element.PaperTextareaElement;
 
@@ -41,6 +42,9 @@ public class Main extends Composite {
   @UiField
   PaperFabElement addButton; // <paper-fab>
 
+  @UiField
+  PaperIconItemElement menuClearAll; // <paper-icon>
+
   private List<Item> items = new ArrayList<>();
 
   public Main() {
@@ -55,7 +59,7 @@ public class Main extends Composite {
       }
     });
 
-    // Add button functionality
+    // Add Button functionality
     confirmAddButton.addEventListener("click", new EventListener() {
       @Override
       public void handleEvent(Event event) {
@@ -70,6 +74,21 @@ public class Main extends Composite {
       }
     });
 
+    // Clear Button functionality
+    menuClearAll.addEventListener("click", new EventListener() {
+      @Override
+      public void handleEvent(Event event) {
+        closeMenu();
+
+        // Remove all child nodes
+        while (content.hasChildNodes()) {
+          content.removeChild(content.getFirstChild());
+        }
+
+      }
+    });
+
+
   } /* end Main() */
 
   // New private method used in the confirmAddButton event handler
@@ -79,6 +98,13 @@ public class Main extends Composite {
     item.setDescription(description);
     content.appendChild(item.getElement());
     items.add(item);
+  }
+
+  private void closeMenu() {
+    // No idea what getNarrow() means
+    if (drawerPanel.getNarrow()) {
+      drawerPanel.closeDrawer();
+    }
   }
 
 } // End class Main
